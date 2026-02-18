@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔢 Asal Sayı Ustası</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Konfeti canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- ANA EKRAN -->
+    <div id="screen-home" class="screen active">
+        <div class="home-container">
+            <div class="logo-area">
+                <div class="logo-icon">🔢</div>
+                <h1 class="game-title">Asal Sayı Ustası</h1>
+                <p class="game-subtitle">Asal sayıları öğrenmenin en eğlenceli yolu!</p>
+            </div>
+            <div class="home-stats" id="home-stats" style="display:none;">
+                <div class="stat-badge">🏆 En Yüksek: <span id="home-best">0</span></div>
+                <div class="stat-badge">🎮 Toplam Oyun: <span id="home-played">0</span></div>
+            </div>
+            <div class="difficulty-select">
+                <p class="diff-label">Zorluk Seviyesi Seç:</p>
+                <div class="diff-buttons">
+                    <button class="diff-btn easy selected" data-diff="easy" onclick="selectDifficulty('easy')">
+                        <span class="diff-emoji">🌱</span>
+                        <span class="diff-name">Kolay</span>
+                        <span class="diff-desc">1-50 arası</span>
+                    </button>
+                    <button class="diff-btn medium" data-diff="medium" onclick="selectDifficulty('medium')">
+                        <span class="diff-emoji">🌿</span>
+                        <span class="diff-name">Orta</span>
+                        <span class="diff-desc">1-200 arası</span>
+                    </button>
+                    <button class="diff-btn hard" data-diff="hard" onclick="selectDifficulty('hard')">
+                        <span class="diff-emoji">🌳</span>
+                        <span class="diff-name">Zor</span>
+                        <span class="diff-desc">1-500 arası</span>
+                    </button>
+                </div>
+            </div>
+            <button class="btn-start" onclick="startGame()">
+                <span class="btn-icon">🚀</span> Oyuna Başla!
+            </button>
+        </div>
+    </div>
+
+    <!-- OYUN EKRANI -->
+    <div id="screen-game" class="screen">
+        <div class="game-header">
+            <div class="header-left">
+                <div class="score-display">⭐ <span id="score">0</span> Puan</div>
+            </div>
+            <div class="header-center">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                    <span class="progress-text" id="progress-text">1/15</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="lives-display" id="lives-display">
+                    <span class="heart">❤️</span>
+                    <span class="heart">❤️</span>
+                    <span class="heart">❤️</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="question-area">
+            <div class="question-card" id="question-card">
+                <div class="question-number" id="question-number">Soru 1</div>
+                <div class="question-text" id="question-text"></div>
+            </div>
+
+            <div class="options-grid" id="options-grid"></div>
+
+            <!-- İpucu / Bilgi Kutusu -->
+            <div class="hint-box" id="hint-box" style="display:none;">
+                <div class="hint-icon">💡</div>
+                <div class="hint-text" id="hint-text"></div>
+            </div>
+
+            <button class="btn-next" id="btn-next" style="display:none;" onclick="nextQuestion()">
+                Sonraki Soru ➡️
+            </button>
+        </div>
+    </div>
+
+    <!-- SONUÇ EKRANI -->
+    <div id="screen-result" class="screen">
+        <div class="result-container" id="result-container">
+            <div class="result-emoji" id="result-emoji"></div>
+            <h2 class="result-title" id="result-title"></h2>
+            <p class="result-message" id="result-message"></p>
+            <div class="result-stats">
+                <div class="result-stat">
+                    <span class="rs-value" id="rs-score">0</span>
+                    <span class="rs-label">Puan</span>
+                </div>
+                <div class="result-stat">
+                    <span class="rs-value" id="rs-correct">0</span>
+                    <span class="rs-label">Doğru</span>
+                </div>
+                <div class="result-stat">
+                    <span class="rs-value" id="rs-wrong">0</span>
+                    <span class="rs-label">Yanlış</span>
+                </div>
+                <div class="result-stat">
+                    <span class="rs-value" id="rs-percent">0%</span>
+                    <span class="rs-label">Başarı</span>
+                </div>
+            </div>
+            <div class="result-badge" id="result-badge"></div>
+            <div class="result-fact" id="result-fact"></div>
+            <div class="result-buttons">
+                <button class="btn-replay" onclick="startGame()">🔄 Tekrar Oyna</button>
+                <button class="btn-home" onclick="goHome()">🏠 Ana Sayfa</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
